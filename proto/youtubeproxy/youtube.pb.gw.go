@@ -28,7 +28,7 @@ var _ status.Status
 var _ = runtime.String
 var _ = utilities.NewDoubleArray
 
-func request_YoutubedlService_FindYoutubeMusic_0(ctx context.Context, marshaler runtime.Marshaler, client YoutubedlServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_YoutubeService_FindYoutubeMusic_0(ctx context.Context, marshaler runtime.Marshaler, client YoutubeServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq YtMusicRequest
 	var metadata runtime.ServerMetadata
 
@@ -41,9 +41,9 @@ func request_YoutubedlService_FindYoutubeMusic_0(ctx context.Context, marshaler 
 
 }
 
-// RegisterYoutubedlServiceHandlerFromEndpoint is same as RegisterYoutubedlServiceHandler but
+// RegisterYoutubeServiceHandlerFromEndpoint is same as RegisterYoutubeServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterYoutubedlServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterYoutubeServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -63,23 +63,23 @@ func RegisterYoutubedlServiceHandlerFromEndpoint(ctx context.Context, mux *runti
 		}()
 	}()
 
-	return RegisterYoutubedlServiceHandler(ctx, mux, conn)
+	return RegisterYoutubeServiceHandler(ctx, mux, conn)
 }
 
-// RegisterYoutubedlServiceHandler registers the http handlers for service YoutubedlService to "mux".
+// RegisterYoutubeServiceHandler registers the http handlers for service YoutubeService to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterYoutubedlServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterYoutubedlServiceHandlerClient(ctx, mux, NewYoutubedlServiceClient(conn))
+func RegisterYoutubeServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterYoutubeServiceHandlerClient(ctx, mux, NewYoutubeServiceClient(conn))
 }
 
-// RegisterYoutubedlServiceHandlerClient registers the http handlers for service YoutubedlService
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "YoutubedlServiceClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "YoutubedlServiceClient"
+// RegisterYoutubeServiceHandlerClient registers the http handlers for service YoutubeService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "YoutubeServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "YoutubeServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "YoutubedlServiceClient" to call the correct interceptors.
-func RegisterYoutubedlServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client YoutubedlServiceClient) error {
+// "YoutubeServiceClient" to call the correct interceptors.
+func RegisterYoutubeServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client YoutubeServiceClient) error {
 
-	mux.Handle("POST", pattern_YoutubedlService_FindYoutubeMusic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_YoutubeService_FindYoutubeMusic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		if cn, ok := w.(http.CloseNotifier); ok {
@@ -97,14 +97,14 @@ func RegisterYoutubedlServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_YoutubedlService_FindYoutubeMusic_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_YoutubeService_FindYoutubeMusic_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_YoutubedlService_FindYoutubeMusic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_YoutubeService_FindYoutubeMusic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -112,9 +112,9 @@ func RegisterYoutubedlServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 }
 
 var (
-	pattern_YoutubedlService_FindYoutubeMusic_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"youtube", "music", "get"}, ""))
+	pattern_YoutubeService_FindYoutubeMusic_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"youtube", "music", "get"}, ""))
 )
 
 var (
-	forward_YoutubedlService_FindYoutubeMusic_0 = runtime.ForwardResponseMessage
+	forward_YoutubeService_FindYoutubeMusic_0 = runtime.ForwardResponseMessage
 )
