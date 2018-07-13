@@ -28,7 +28,7 @@ var _ status.Status
 var _ = runtime.String
 var _ = utilities.NewDoubleArray
 
-func request_YoutubeService_FindYoutubeMusic_0(ctx context.Context, marshaler runtime.Marshaler, client YoutubeServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_YoutubeService_SearchYoutubeMusic_0(ctx context.Context, marshaler runtime.Marshaler, client YoutubeServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq YtMusicRequest
 	var metadata runtime.ServerMetadata
 
@@ -36,7 +36,7 @@ func request_YoutubeService_FindYoutubeMusic_0(ctx context.Context, marshaler ru
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.FindYoutubeMusic(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.SearchYoutubeMusic(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
@@ -92,7 +92,7 @@ func RegisterYoutubeServiceHandler(ctx context.Context, mux *runtime.ServeMux, c
 // "YoutubeServiceClient" to call the correct interceptors.
 func RegisterYoutubeServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client YoutubeServiceClient) error {
 
-	mux.Handle("POST", pattern_YoutubeService_FindYoutubeMusic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_YoutubeService_SearchYoutubeMusic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		if cn, ok := w.(http.CloseNotifier); ok {
@@ -110,14 +110,14 @@ func RegisterYoutubeServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_YoutubeService_FindYoutubeMusic_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_YoutubeService_SearchYoutubeMusic_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_YoutubeService_FindYoutubeMusic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_YoutubeService_SearchYoutubeMusic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -154,13 +154,13 @@ func RegisterYoutubeServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 }
 
 var (
-	pattern_YoutubeService_FindYoutubeMusic_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"youtube", "music", "search"}, ""))
+	pattern_YoutubeService_SearchYoutubeMusic_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"youtube", "music", "search"}, ""))
 
 	pattern_YoutubeService_DownloadYoutubeMusic_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"youtube", "music", "download"}, ""))
 )
 
 var (
-	forward_YoutubeService_FindYoutubeMusic_0 = runtime.ForwardResponseMessage
+	forward_YoutubeService_SearchYoutubeMusic_0 = runtime.ForwardResponseMessage
 
 	forward_YoutubeService_DownloadYoutubeMusic_0 = runtime.ForwardResponseMessage
 )
