@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"log"
 	"net/http"
 
 	"github.com/golang/glog"
@@ -28,6 +29,8 @@ func run() error {
 	if err != nil {
 		return err
 	}
+
+	log.Printf("Starting listening at %s", *youtubeEndpoint)
 
 	return http.ListenAndServe(":8080", mux)
 }
